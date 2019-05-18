@@ -26,9 +26,9 @@ public class Pawn extends Piece {
                         possibleSquares.add(boardSquares[4][y]);
                 }
             }
-            if ((y > 0) && (boardSquares[x - 1][y - 1].getPiece() != null) && (boardSquares[x - 1][y - 1].getPiece().getPieceColor() != this.getPieceColor()))
+            if ((y > 0) && (boardSquares[x - 1][y - 1].getPiece() != null) && (!boardSquares[x - 1][y - 1].getPiece().getPieceColor().equals(this.getPieceColor())))
                 possibleSquares.add(boardSquares[x - 1][y - 1]);
-            if ((y < 7) && (boardSquares[x - 1][y + 1].getPiece() != null) && (boardSquares[x - 1][y + 1].getPiece().getPieceColor() != this.getPieceColor()))
+            if ((y < 7) && (boardSquares[x - 1][y + 1].getPiece() != null) && (!boardSquares[x - 1][y + 1].getPiece().getPieceColor().equals(this.getPieceColor())))
                 possibleSquares.add(boardSquares[x - 1][y + 1]);
         }
         else if(getPieceColor().equals("b")) {
@@ -41,9 +41,9 @@ public class Pawn extends Piece {
                         possibleSquares.add(boardSquares[3][y]);
                 }
             }
-            if ((y > 0) && (boardSquares[x + 1][y - 1].getPiece() != null) && (boardSquares[x + 1][y - 1].getPiece().getPieceColor() != this.getPieceColor()))
+            if ((y > 0) && (boardSquares[x + 1][y - 1].getPiece() != null) && (!boardSquares[x + 1][y - 1].getPiece().getPieceColor().equals(this.getPieceColor())))
                 possibleSquares.add(boardSquares[x + 1][y - 1]);
-            if ((y < 7) && (boardSquares[x + 1][y + 1].getPiece() != null) && (boardSquares[x + 1][y + 1].getPiece().getPieceColor() != this.getPieceColor()))
+            if ((y < 7) && (boardSquares[x + 1][y + 1].getPiece() != null) && (!boardSquares[x + 1][y + 1].getPiece().getPieceColor().equals(this.getPieceColor())))
                 possibleSquares.add(boardSquares[x + 1][y + 1]);
         }
 

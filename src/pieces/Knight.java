@@ -16,7 +16,7 @@ public class Knight extends Piece {
         int posy[] = {y - 2, y + 2, y - 1, y + 1, y - 2, y + 2, y - 1, y + 1};
         for (int i = 0; i < 8; i++)
             if ((posx[i] >= 0 && posx[i] < 8 && posy[i] >= 0 && posy[i] < 8))
-                if ((boardSquares[posx[i]][posy[i]].getPiece() == null || boardSquares[posx[i]][posy[i]].getPiece().getPieceColor() != this.getPieceColor())) {
+                if ((boardSquares[posx[i]][posy[i]].getPiece() == null || !boardSquares[posx[i]][posy[i]].getPiece().getPieceColor().equals(this.getPieceColor()))) {
                     possibleSquares.add(boardSquares[posx[i]][posy[i]]);
                 }
     return possibleSquares;

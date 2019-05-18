@@ -173,19 +173,21 @@ private Main() {
             }
             else if (i == 0 && j == 3) {
                 //piece = bk;
-                chessBoardSquares[i][j].setPiece(bk);
+                chessBoardSquares[i][j].setPiece(bq);
             }
             else if (i == 0 && j == 4) {
                 //piece = bq;
-                chessBoardSquares[i][j].setPiece(bq);
+
+                chessBoardSquares[i][j].setPiece(bk);
             }
             else if (i == 7 && j == 3) {
                 //piece = wk;
-                chessBoardSquares[i][j].setPiece(wk);
+                chessBoardSquares[i][j].setPiece(wq);
             }
             else if (i == 7 && j == 4) {
                 //piece = wq;
-                chessBoardSquares[i][j].setPiece(wq);
+
+                chessBoardSquares[i][j].setPiece(wk);
             }
             else if (i == 1) {
               //  piece = bp[j];

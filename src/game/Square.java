@@ -29,6 +29,12 @@ public class Square extends JButton {
 
 
     }
+    public Square(int x, int y,Piece piece){
+        this.x=x;
+        this.y = y;
+        this.piece=piece;
+
+    }
 
     /**
      *
@@ -37,9 +43,11 @@ public class Square extends JButton {
     public void setPiece(Piece piece) {
         this.piece = piece;
         hasPiece = true;
-        ImageIcon img=new ImageIcon(this.getClass().getResource(piece.getImage()));
-        image=new JLabel(img);
-        this.add(image);
+//        ImageIcon img=new ImageIcon(this.getClass().getResource(piece.getImage()));
+//        image=new JLabel(img);
+      //  JLabel imgLabel = new JLabel(new ImageIcon(piece.getImage()));
+        this.add(new JLabel(new ImageIcon(piece.getImage())));
+       // this.add(image);
     }
 
     /**

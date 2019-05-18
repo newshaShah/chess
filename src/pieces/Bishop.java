@@ -23,7 +23,7 @@ public class Bishop extends Piece {
             {
                 possibleSquares.add(boardSquares[tempx][tempy]);
             }
-            else if(boardSquares[tempx][tempy].getPiece().getPieceColor()==this.getPieceColor())
+            else if(boardSquares[tempx][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else
             {
@@ -38,7 +38,7 @@ public class Bishop extends Piece {
         {
             if(boardSquares[tempx][tempy].getPiece()==null)
                 possibleSquares.add(boardSquares[tempx][tempy]);
-            else if(boardSquares[tempx][tempy].getPiece().getPieceColor()==this.getPieceColor())
+            else if(boardSquares[tempx][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else
             {
@@ -53,7 +53,7 @@ public class Bishop extends Piece {
         {
             if(boardSquares[tempx][tempy].getPiece()==null)
                 possibleSquares.add(boardSquares[tempx][tempy]);
-            else if(boardSquares[tempx][tempy].getPiece().getPieceColor()==this.getPieceColor())
+            else if(boardSquares[tempx][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else
             {
@@ -68,7 +68,7 @@ public class Bishop extends Piece {
         {
             if(boardSquares[tempx][tempy].getPiece()==null)
                 possibleSquares.add(boardSquares[tempx][tempy]);
-            else if(boardSquares[tempx][tempy].getPiece().getPieceColor()==this.getPieceColor())
+            else if(boardSquares[tempx][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else
             {

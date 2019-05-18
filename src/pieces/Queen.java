@@ -5,6 +5,7 @@ import game.Square;
 import java.util.ArrayList;
 
 public class Queen extends Piece {
+
     public Queen(String ID,String imagePath,String color){
         setPieceId(ID);
         setImage( imagePath);
@@ -17,7 +18,7 @@ public class Queen extends Piece {
         while (tempx >= 0) {
             if (boardSquares[tempx][y].getPiece() == null)
                 possibleSquares.add(boardSquares[tempx][y]);
-            else if (boardSquares[tempx][y].getPiece().getPieceColor() == this.getPieceColor())
+            else if (boardSquares[tempx][y].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else {
                 possibleSquares.add(boardSquares[tempx][y]);
@@ -30,7 +31,7 @@ public class Queen extends Piece {
         while (tempx < 8) {
             if (boardSquares[tempx][y].getPiece() == null)
                 possibleSquares.add(boardSquares[tempx][y]);
-            else if (boardSquares[tempx][y].getPiece().getPieceColor() == this.getPieceColor())
+            else if (boardSquares[tempx][y].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else {
                 possibleSquares.add(boardSquares[tempx][y]);
@@ -45,7 +46,7 @@ public class Queen extends Piece {
         while (tempy >= 0) {
             if (boardSquares[x][tempy].getPiece() == null)
                 possibleSquares.add(boardSquares[x][tempy]);
-            else if (boardSquares[x][tempy].getPiece().getPieceColor() == this.getPieceColor())
+            else if (boardSquares[x][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else {
                 possibleSquares.add(boardSquares[x][tempy]);
@@ -57,7 +58,7 @@ public class Queen extends Piece {
         while (tempy < 8) {
             if (boardSquares[x][tempy].getPiece() == null)
                 possibleSquares.add(boardSquares[x][tempy]);
-            else if (boardSquares[x][tempy].getPiece().getPieceColor() == this.getPieceColor())
+            else if (boardSquares[x][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else {
                 possibleSquares.add(boardSquares[x][tempy]);
@@ -72,7 +73,7 @@ public class Queen extends Piece {
         while (tempx < 8 && tempy >= 0) {
             if (boardSquares[tempx][tempy].getPiece() == null)
                 possibleSquares.add(boardSquares[tempx][tempy]);
-            else if (boardSquares[tempx][tempy].getPiece().getPieceColor() == this.getPieceColor())
+            else if (boardSquares[tempx][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else {
                 possibleSquares.add(boardSquares[tempx][tempy]);
@@ -83,10 +84,11 @@ public class Queen extends Piece {
         }
         tempx = x - 1;
         tempy = y + 1;
+
         while (tempx >= 0 && tempy < 8) {
             if (boardSquares[tempx][tempy].getPiece() == null)
                 possibleSquares.add(boardSquares[tempx][tempy]);
-            else if (boardSquares[tempx][tempy].getPiece().getPieceColor() == this.getPieceColor())
+            else if (boardSquares[tempx][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else {
                 possibleSquares.add(boardSquares[tempx][tempy]);
@@ -100,7 +102,7 @@ public class Queen extends Piece {
         while (tempx >= 0 && tempy >= 0) {
             if (boardSquares[tempx][tempy].getPiece() == null)
                 possibleSquares.add(boardSquares[tempx][tempy]);
-            else if (boardSquares[tempx][tempy].getPiece().getPieceColor() == this.getPieceColor())
+            else if (boardSquares[tempx][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else {
                 possibleSquares.add(boardSquares[tempx][tempy]);
@@ -114,7 +116,7 @@ public class Queen extends Piece {
         while (tempx < 8 && tempy < 8) {
             if (boardSquares[tempx][tempy].getPiece() == null)
                 possibleSquares.add(boardSquares[tempx][tempy]);
-            else if (boardSquares[tempx][tempy].getPiece().getPieceColor() == this.getPieceColor())
+            else if (boardSquares[tempx][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else {
                 possibleSquares.add(boardSquares[tempx][tempy]);

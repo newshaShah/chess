@@ -19,7 +19,7 @@ public class Rook extends Piece {
         {
             if(boardSquares[tempx][y].getPiece()==null)
                 possibleSquares.add(boardSquares[tempx][y]);
-            else if(boardSquares[tempx][y].getPiece().getPieceColor()==this.getPieceColor())
+            else if(boardSquares[tempx][y].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else
             {
@@ -33,7 +33,7 @@ public class Rook extends Piece {
         {
             if(boardSquares[tempx][y].getPiece()==null)
                 possibleSquares.add(boardSquares[tempx][y]);
-            else if(boardSquares[tempx][y].getPiece().getPieceColor()==this.getPieceColor())
+            else if(boardSquares[tempx][y].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else
             {
@@ -47,7 +47,7 @@ public class Rook extends Piece {
         {
             if(boardSquares[x][tempy].getPiece()==null)
                 possibleSquares.add(boardSquares[x][tempy]);
-            else if(boardSquares[x][tempy].getPiece().getPieceColor()==this.getPieceColor())
+            else if(boardSquares[x][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else
             {
@@ -61,7 +61,7 @@ public class Rook extends Piece {
         {
             if(boardSquares[x][tempy].getPiece()==null)
                 possibleSquares.add(boardSquares[x][tempy]);
-            else if(boardSquares[x][tempy].getPiece().getPieceColor()==this.getPieceColor())
+            else if(boardSquares[x][tempy].getPiece().getPieceColor().equals(this.getPieceColor()))
                 break;
             else
             {
