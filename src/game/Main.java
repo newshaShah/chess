@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 /**
  * @author Newsha Shahbodaghkhan
@@ -22,6 +23,9 @@ public class Main extends JFrame implements MouseListener{
     private static Main Mainboard;
   //  private JButton[][] chessBoardSquares ;
     private Square [][] chessBoardSquares;
+    private  boolean select=false;
+    private Square lastSquare;
+    private Piece lastPiece;
    private JFrame myFrame;
     private static Rook wr01,wr02,br01,br02;
     private static Knight wk01,wk02,bk01,bk02;
@@ -216,15 +220,83 @@ private Main() {
             centerpanel.add(chessBoardSquares[i][j]);
         }
     }
+   // MouseListener mouseListener = null;
+    for(int i=0;i<8;i++){
+        for(int j=0;j<8;j++){
+            chessBoardSquares[i][j].addMouseListener(this);
+        }
+    }
+//    chessBoardSquares
+//    String whosTurn = "white";
+//    while(bk.isCheckMate(chessBoardSquares)){
+//
+//    }
 
             myFrame.setVisible(true);
     myFrame.setResizable(true);
             myFrame.setExtendedState(myFrame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         }
     @Override
-    public void mouseClicked (MouseEvent e){
+    public void mouseClicked (MouseEvent e) {
 
-    }
+        if (!select) {
+            ((Square) (e.getSource())).selectSquare();
+        }
+        else {
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    chessBoardSquares[i][j].cancleSelection();
+                }
+            }
+            ((Square) (e.getSource())).selectSquare();
+        }
+            select=true;
+//        Square square1 = null;
+//        Piece piece1 = null;
+        if(((Square) (e.getSource())).getPiece()!=null) {
+             lastSquare = ((Square) (e.getSource()));
+            lastPiece = ((Square) (e.getSource())).getPiece();
+        }
+
+
+            if(((Square) (e.getSource())).getPiece()!=null){
+
+                ArrayList<Square> possibleMoves=new ArrayList<>();
+
+                for(int i=0;i<8;i++){
+                    for(int j=0;j<8;j++){
+//
+                        if(chessBoardSquares[i][j].isSelected()){
+                           Piece piece = chessBoardSquares[i][j].getPiece();
+                           possibleMoves = piece.move(chessBoardSquares,i,j);
+                        }
+                        }
+                    }
+
+              for(Square ps:possibleMoves){
+                  ps.makePossible();
+
+              }
+            //  System.out.println(piece1+"/"+square1);
+              if(((Square) (e.getSource())).isPossibleSquare()&&((Square) (e.getSource())).isSelected()){
+                 // if (lastSquare != null)
+                      ((Square) (e.getSource())).setPiece(lastPiece);
+               //   if (lastSquare != null) {
+                     lastSquare.removePiece();
+                  }
+
+              }
+
+            }
+
+
+
+
+
+
+
+
+
     @Override
     public void mouseEntered (MouseEvent arg0){
 
