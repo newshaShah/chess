@@ -10,8 +10,10 @@ public class Knight extends Piece {
         setImage(imagePath);
         setPieceColor(color);
     }
+    @Override
     public ArrayList<Square> move(Square [][] boardSquares, int x, int y) {
-        possibleSquares.clear();
+        ArrayList<Square> possibleSquares=new ArrayList<>();
+        //possibleSquares.clear();
         int posx[] = {x + 1, x + 1, x + 2, x + 2, x - 1, x - 1, x - 2, x - 2};
         int posy[] = {y - 2, y + 2, y - 1, y + 1, y - 2, y + 2, y - 1, y + 1};
         for (int i = 0; i < 8; i++)

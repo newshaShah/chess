@@ -6,14 +6,18 @@ import java.util.ArrayList;
 
 public class Pawn extends Piece {
 
+
     public Pawn(String ID,String imagePath,String color){
         setPieceId(ID);
         setImage( imagePath);
         setPieceColor(color);
+
     }
+    @Override
     public ArrayList<Square> move(Square [][] boardSquares, int x, int y){
         //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
-        possibleSquares.clear();
+       // possibleSquares.clear();
+        ArrayList<Square> possibleSquares=new ArrayList<>();
 
         if(getPieceColor().equals("w")){
             if(x==0){
@@ -50,4 +54,9 @@ public class Pawn extends Piece {
         return possibleSquares;
 
     }
+
+//    @Override
+//    public ArrayList<Square> move() {
+//        return null;
+//    }
 }

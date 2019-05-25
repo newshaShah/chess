@@ -29,7 +29,16 @@ public class Square extends JButton {
 
 
     }
-    public Square(int x, int y,Piece piece){
+
+    public JLabel getImage() {
+        return image;
+    }
+
+    public void setImage(JLabel image) {
+        this.image = image;
+    }
+
+    public Square(int x, int y, Piece piece){
         this.x=x;
         this.y = y;
         this.piece=piece;
@@ -46,7 +55,8 @@ public class Square extends JButton {
 //        ImageIcon img=new ImageIcon(this.getClass().getResource(piece.getImage()));
 //        image=new JLabel(img);
       //  JLabel imgLabel = new JLabel(new ImageIcon(piece.getImage()));
-        this.add(new JLabel(new ImageIcon(piece.getImage())));
+        image= new JLabel(new ImageIcon(piece.getImage()));
+        this.add(image);
        // this.add(image);
     }
 
@@ -57,6 +67,10 @@ public class Square extends JButton {
     {
         this.setBorder(BorderFactory.createLineBorder(Color.red,6));
         this.isSelected=true;
+    }
+
+    public boolean isSelected(){
+        return isSelected;
     }
 
     /**
@@ -75,12 +89,20 @@ public class Square extends JButton {
         this.possibleSquare = true;
     }
 
+    protected void canclePossibility(){
+        this.possibleSquare=false;
+    }
+
     /**
      * removes a piece of a square
      */
     public void removePiece(){
         this.piece = null;
         this.remove(image);
+//        this.remove(this.piece);
+//        this.remove(image);
+//        this.setImage(null);
+       // this.remove(new JLabel(new ImageIcon(null));
     }
 
     /**
@@ -90,6 +112,8 @@ public class Square extends JButton {
     public boolean hasPiece() {
         return hasPiece;
     }
+
+
 
     /**
      * @return true if square is possible for moving a piece

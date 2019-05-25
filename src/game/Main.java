@@ -3,6 +3,7 @@ package game;
 import pieces.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,9 +24,14 @@ public class Main extends JFrame implements MouseListener{
     private static Main Mainboard;
   //  private JButton[][] chessBoardSquares ;
     private Square [][] chessBoardSquares;
+    private ArrayList<JButton> outWhitePieces;
+    private ArrayList<JButton> outBlackPieces;
     private  boolean select=false;
     private Square lastSquare;
     private Piece lastPiece;
+   private ArrayList<Square> possibleMoves ;
+   private String whosTurn = "w";
+   private boolean isMoved=false;
    private JFrame myFrame;
     private static Rook wr01,wr02,br01,br02;
     private static Knight wk01,wk02,bk01,bk02;
@@ -33,8 +39,9 @@ public class Main extends JFrame implements MouseListener{
     private static Pawn wp[],bp[];
     private static Queen wq,bq;
     private static King wk,bk;
+    private JButton turn;
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
 
    // Mainboard.setVisible(true);
     wr01=new Rook("WR01", "src\\game\\White_Rook.png","w");
@@ -63,30 +70,47 @@ public static void main(String[] args) {
     }
     Mainboard = new Main();
 }
+private void changeTurn(){
+    if(whosTurn.equals("w")) whosTurn="b";
+    else whosTurn="w";
 
+}
 
 private Main() {
     chessBoardSquares = new Square[8][8];
+    outBlackPieces = new ArrayList<>(16);
+    outWhitePieces = new ArrayList<>(16);
     myFrame = new JFrame("Chess");
 
     myFrame.setLayout(new BorderLayout(100, 100));
     JPanel centerpanel = new JPanel();
     JPanel westPanel = new JPanel();
     westPanel.setBackground(Color.BLACK);
-    westPanel.setPreferredSize(new Dimension(400, 30));
+    westPanel.setPreferredSize(new Dimension(400, 200));
     westPanel.setLayout(new BorderLayout(3, 1));
 
     JPanel northOfWest = new JPanel();
-    northOfWest.setPreferredSize(new Dimension(400, 100));
+    northOfWest.setPreferredSize(new Dimension(400, 300));
     northOfWest.setBackground(new Color(51, 0, 0));
 
+
+    Border emptyBorder = BorderFactory.createEmptyBorder();
     JPanel centerOfWest = new JPanel();
     centerOfWest.setPreferredSize(new Dimension(400, 100));
     centerOfWest.setBackground(new Color(153, 102, 0));
+    turn = new JButton("Let's start! ");
+    turn.setBorder(emptyBorder);
+    turn.setBackground(new Color(153, 102, 0));
+    turn.setFont(new Font("Arial", Font.PLAIN, 40));
+    turn.setForeground(Color.black);
+    turn.setPreferredSize(new Dimension(300,50));
+    centerOfWest.add(turn);
+
 
     JPanel southOfWest = new JPanel();
-    southOfWest.setPreferredSize(new Dimension(400, 100));
+    southOfWest.setPreferredSize(new Dimension(400, 300));
     southOfWest.setBackground(new Color(51, 0, 0));
+
 
 
     westPanel.add(northOfWest, BorderLayout.NORTH);
@@ -117,6 +141,21 @@ private Main() {
                 chessBoardSquares[i][j].setBackground(new Color(51, 51, 51));
             }
         }
+    }
+    for (int i = 0; i <16 ; i++) {
+        outBlackPieces.add(new JButton());
+        outWhitePieces.add(new JButton());
+    }
+
+    for(int i=0;i<16;i++){
+        //outWhitePieces.get(i)=new JButton();
+        outWhitePieces.get(i).setBackground(new Color(51, 0, 0));
+      //  outWhitePieces.get(i).setBorder(emptyBorder);
+        northOfWest.add(outWhitePieces.get(i));
+      //  outBlackPieces[i]=new JButton();
+        outBlackPieces.get(i).setBackground(new Color(51, 0, 0));
+       // outBlackPieces[i].setBorder(emptyBorder);
+        southOfWest.add(outBlackPieces.get(i));
     }
 
 
@@ -232,6 +271,7 @@ private Main() {
 //
 //    }
 
+
             myFrame.setVisible(true);
     myFrame.setResizable(true);
             myFrame.setExtendedState(myFrame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -241,8 +281,7 @@ private Main() {
 
         if (!select) {
             ((Square) (e.getSource())).selectSquare();
-        }
-        else {
+        } else {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     chessBoardSquares[i][j].cancleSelection();
@@ -250,42 +289,96 @@ private Main() {
             }
             ((Square) (e.getSource())).selectSquare();
         }
-            select=true;
-//        Square square1 = null;
-//        Piece piece1 = null;
-        if(((Square) (e.getSource())).getPiece()!=null) {
-             lastSquare = ((Square) (e.getSource()));
+        select = true;
+
+        //selecting a square and showing it's possible squares
+        if (((Square) (e.getSource())).getPiece() != null && ((Square) (e.getSource())).getPiece().getPieceColor().equals(whosTurn) ) {
+
+            lastSquare = ((Square) (e.getSource()));
             lastPiece = ((Square) (e.getSource())).getPiece();
+
+
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+//
+                    if (chessBoardSquares[i][j].isSelected()) {
+                        Piece piece = chessBoardSquares[i][j].getPiece();
+                        possibleMoves = piece.move(chessBoardSquares, i, j);
+                    }
+                }
+            }
+
+            for (Square ps : possibleMoves) {
+                ps.makePossible();
+
+            }
         }
 
-
-            if(((Square) (e.getSource())).getPiece()!=null){
-
-                ArrayList<Square> possibleMoves=new ArrayList<>();
-
-                for(int i=0;i<8;i++){
-                    for(int j=0;j<8;j++){
-//
-                        if(chessBoardSquares[i][j].isSelected()){
-                           Piece piece = chessBoardSquares[i][j].getPiece();
-                           possibleMoves = piece.move(chessBoardSquares,i,j);
+//moving a piece to a possible square
+               else if(((Square) (e.getSource())).getPiece()==null) {
+                    if (((Square) (e.getSource())).isPossibleSquare() && ((Square) (e.getSource())).isSelected()) {
+                        // if (lastSquare != null)
+                        ((Square) (e.getSource())).setPiece(lastPiece);
+                        //   if (lastSquare != null) {
+                        lastSquare.removePiece();
+                       isMoved=true;
+                        // chessBoardSquares[1][j].setPiece(bp[j]);
+                        for(int i=0;i<8;i++){
+                            for(int j=0;j<8;j++){
+                                if (chessBoardSquares[i][j]==lastSquare){
+                                    chessBoardSquares[i][j].removePiece();
+                                }
+                            }
                         }
-                        }
+                        
+
                     }
+                }
+               else if(!((Square) (e.getSource())).getPiece().getPieceColor().equals(whosTurn)){
+                   if(((Square) (e.getSource())).isPossibleSquare() && ((Square) (e.getSource())).isSelected()){
+                       ((Square) (e.getSource())).removePiece();
+                       for(int i=0;i<8;i++){
+                           for(int j=0;j<8;j++){
+                               if (chessBoardSquares[i][j]== (Square) (e.getSource())){
+//                                    if(((Square) (e.getSource())).getPiece().getPieceColor().equals("w")){
+//                                        JButton button = new JButton();
+//                                        JLabel imageIcon = new JLabel(new ImageIcon(((Square) (e.getSource())).getPiece().getImage()));
+//                                        button.add(imageIcon);
+//
+//                                        outWhitePieces.add(button);
+//                                    }
+                                   chessBoardSquares[i][j].removePiece();
 
-              for(Square ps:possibleMoves){
-                  ps.makePossible();
+                               }
+                           }
+                       }
+                       ((Square) (e.getSource())).setPiece(lastPiece);
+                       lastSquare.removePiece();
+                       isMoved=true;
+                       for(int i=0;i<8;i++){
+                           for(int j=0;j<8;j++){
+                               if (chessBoardSquares[i][j]== lastSquare){
+                                   chessBoardSquares[i][j].removePiece();
+                               }
+                           }
+                       }
+                   }
 
-              }
-            //  System.out.println(piece1+"/"+square1);
-              if(((Square) (e.getSource())).isPossibleSquare()&&((Square) (e.getSource())).isSelected()){
-                 // if (lastSquare != null)
-                      ((Square) (e.getSource())).setPiece(lastPiece);
-               //   if (lastSquare != null) {
-                     lastSquare.removePiece();
-                  }
-
-              }
+        }
+             if(isMoved)  {
+                 changeTurn();
+                 possibleMoves.clear();
+                 for (int i = 0; i <8 ; i++) {
+                     for (int j = 0; j <8 ; j++) {
+                         chessBoardSquares[i][j].canclePossibility();
+                     }
+                 }
+                 isMoved=false;
+             }
+            turn.setText("It's your turn! ");
+        turn.setForeground(Color.GRAY);
+        if(whosTurn.equals("w"))turn.setBackground(Color.white);
+        else turn.setBackground(Color.BLACK);
 
             }
 

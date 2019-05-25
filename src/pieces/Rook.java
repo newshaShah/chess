@@ -10,8 +10,10 @@ public class Rook extends Piece {
         setImage( imagePath);
         setPieceColor(color);
     }
+    @Override
     public ArrayList<Square> move(Square [][] boardSquares, int x, int y){
         //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
+        ArrayList<Square> possibleSquares=new ArrayList<>();
         possibleSquares.clear();
 
         int tempx=x-1;
