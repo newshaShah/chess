@@ -25,7 +25,9 @@ public class Main extends JFrame implements MouseListener{
   //  private JButton[][] chessBoardSquares ;
     private Square [][] chessBoardSquares;
     private ArrayList<JButton> outWhitePieces;
+    private int outWhitePiecesNum=0;
     private ArrayList<JButton> outBlackPieces;
+    private int outBlackPiecesNum=0;
     private  boolean select=false;
     private Square lastSquare;
     private Piece lastPiece;
@@ -81,6 +83,7 @@ private Main() {
     outBlackPieces = new ArrayList<>(16);
     outWhitePieces = new ArrayList<>(16);
     myFrame = new JFrame("Chess");
+    Border emptyBorder = BorderFactory.createEmptyBorder();
 
     myFrame.setLayout(new BorderLayout(100, 100));
     JPanel centerpanel = new JPanel();
@@ -89,12 +92,16 @@ private Main() {
     westPanel.setPreferredSize(new Dimension(400, 200));
     westPanel.setLayout(new BorderLayout(3, 1));
 
+
     JPanel northOfWest = new JPanel();
     northOfWest.setPreferredSize(new Dimension(400, 300));
     northOfWest.setBackground(new Color(51, 0, 0));
 
+    northOfWest.setLayout(new GridLayout(4,4));
 
-    Border emptyBorder = BorderFactory.createEmptyBorder();
+
+
+
     JPanel centerOfWest = new JPanel();
     centerOfWest.setPreferredSize(new Dimension(400, 100));
     centerOfWest.setBackground(new Color(153, 102, 0));
@@ -110,6 +117,7 @@ private Main() {
     JPanel southOfWest = new JPanel();
     southOfWest.setPreferredSize(new Dimension(400, 300));
     southOfWest.setBackground(new Color(51, 0, 0));
+    southOfWest.setLayout(new GridLayout(4,4));
 
 
 
@@ -156,6 +164,11 @@ private Main() {
         outBlackPieces.get(i).setBackground(new Color(51, 0, 0));
        // outBlackPieces[i].setBorder(emptyBorder);
         southOfWest.add(outBlackPieces.get(i));
+    }
+
+    for(int i=0;i<16;i++){
+        southOfWest.add(outWhitePieces.get(i));
+        northOfWest.add(outBlackPieces.get(i));
     }
 
 
@@ -240,20 +253,10 @@ private Main() {
               //  piece = wp[j];
                 chessBoardSquares[6][j].setPiece(wp[j]);
             }
-//         Square square = new Square(i, j, P);
-//           square.setPiece(P);
-          //  piece= wr02;
-      //      assert P != null;
-           // piece=new Rook("1","src\\\\game\\\\White_Rook.png","w");
-
-           // chessBoardSquares[i][j].setPiece(piece);
         }
     }
 
-//chessBoardSquares[0][0].selectSquare();
-    //ImageIcon img = Black_Rook.png;
-    //JLabel imgLabel = new JLabel(new ImageIcon("Black_Rook.png"));
-    chessBoardSquares[0][0].add(new JLabel(new ImageIcon("src\\game\\Black_Rook.png")));
+
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             centerpanel.add(chessBoardSquares[i][j]);
@@ -265,11 +268,6 @@ private Main() {
             chessBoardSquares[i][j].addMouseListener(this);
         }
     }
-//    chessBoardSquares
-//    String whosTurn = "white";
-//    while(bk.isCheckMate(chessBoardSquares)){
-//
-//    }
 
 
             myFrame.setVisible(true);
@@ -336,22 +334,33 @@ private Main() {
                 }
                else if(!((Square) (e.getSource())).getPiece().getPieceColor().equals(whosTurn)){
                    if(((Square) (e.getSource())).isPossibleSquare() && ((Square) (e.getSource())).isSelected()){
+                       Piece piece=((Square) (e.getSource())).getPiece();
+                       JLabel imageIcon = new JLabel(new ImageIcon(piece.getImage()));
+                       if(piece.getPieceColor().equals("w")) {
+                           outWhitePieces.get(outWhitePiecesNum).add(imageIcon);
+                           outWhitePiecesNum++;
+                       }
+                       else{
+                           outBlackPieces.get(outBlackPiecesNum).add(imageIcon);
+                           outBlackPiecesNum++;
+                       }
+
                        ((Square) (e.getSource())).removePiece();
-                       for(int i=0;i<8;i++){
-                           for(int j=0;j<8;j++){
-                               if (chessBoardSquares[i][j]== (Square) (e.getSource())){
-//                                    if(((Square) (e.getSource())).getPiece().getPieceColor().equals("w")){
+//                       for(int i=0;i<8;i++){
+//                           for(int j=0;j<8;j++){
+                              // if (chessBoardSquares[i][j]== (Square) (e.getSource())){
+
 //                                        JButton button = new JButton();
 //                                        JLabel imageIcon = new JLabel(new ImageIcon(((Square) (e.getSource())).getPiece().getImage()));
 //                                        button.add(imageIcon);
 //
 //                                        outWhitePieces.add(button);
 //                                    }
-                                   chessBoardSquares[i][j].removePiece();
-
-                               }
-                           }
-                       }
+//                                   chessBoardSquares[i][j].removePiece();
+//
+//                               }
+//                           }
+//                       }
                        ((Square) (e.getSource())).setPiece(lastPiece);
                        lastSquare.removePiece();
                        isMoved=true;
