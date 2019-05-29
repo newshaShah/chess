@@ -35,7 +35,7 @@ public class King extends Piece {
     public ArrayList<Square> move(Square[][] squares, int x, int y){
 //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
         ArrayList<Square> possibleSquares=new ArrayList<>();
-        possibleSquares.clear();
+
         int posx[]={x,x,x+1,x+1,x+1,x-1,x-1,x-1};
         int posy[]={y-1,y+1,y-1,y,y+1,y-1,y,y+1};
         for(int i=0;i<8;i++)

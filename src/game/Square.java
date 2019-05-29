@@ -10,8 +10,8 @@ import java.awt.*;
  */
 public class Square extends JButton {
 
-    int x;
-    int y;
+    private int x;
+    private int y;
     private Piece piece;
     private boolean isSelected = false;
     private boolean hasPiece = false;
@@ -28,6 +28,14 @@ public class Square extends JButton {
         this.y = y;
 
 
+    }
+
+    public int getMyX() {
+        return x;
+    }
+
+    public int getMyY(){
+        return y;
     }
 
     public JLabel getImage() {
