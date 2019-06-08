@@ -3,6 +3,7 @@ package pieces;
 import game.Square;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Knight extends Piece {
     public Knight(String ID, String imagePath, String color) {
@@ -21,6 +22,9 @@ public class Knight extends Piece {
                 if ((boardSquares[posx[i]][posy[i]].getPiece() == null || !boardSquares[posx[i]][posy[i]].getPiece().getPieceColor().equals(this.getPieceColor()))) {
                     possibleSquares.add(boardSquares[posx[i]][posy[i]]);
                 }
+
+
+
     return possibleSquares;
     }
 }

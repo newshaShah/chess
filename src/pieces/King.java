@@ -3,6 +3,7 @@ package pieces;
 import game.Square;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class King extends Piece {
     private int x,y;
@@ -14,6 +15,10 @@ public class King extends Piece {
         setImage( imagePath);
         setPieceColor(color);
     }
+
+    public King() {
+    }
+
     public void setx(int x)
     {
         this.x=x;
@@ -42,6 +47,9 @@ public class King extends Piece {
             if((posx[i]>=0&&posx[i]<8&&posy[i]>=0&&posy[i]<8))
                 if((squares[posx[i]][posy[i]].getPiece()==null|| !squares[posx[i]][posy[i]].getPiece().getPieceColor().equals(this.getPieceColor())))
                     possibleSquares.add(squares[posx[i]][posy[i]]);
+
+
+
         return possibleSquares;
     }
 

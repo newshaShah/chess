@@ -24,11 +24,13 @@ public class Main extends JFrame implements MouseListener {
     private static Rook wr01, wr02, br01, br02;
     private static Knight wk01, wk02, bk01, bk02;
     private static Bishop wb01, wb02, bb01, bb02;
-    private static Pawn wp[], bp[];
+    private static Pawn[] wp;
+    private static Pawn[] bp;
     private static Queen wq, bq;
     private static King wk, bk;
     //  private JButton[][] chessBoardSquares ;
     private Square[][] chessBoardSquares;
+
     private ArrayList<JButton> outWhitePieces;
     private int outWhitePiecesNum = 0;
     private ArrayList<JButton> outBlackPieces;
@@ -39,6 +41,7 @@ public class Main extends JFrame implements MouseListener {
     private ArrayList<Square> possibleMoves;
     private String whosTurn = "w";
     private boolean isMoved = false;
+    private boolean inDanger = false;
     private JFrame myFrame;
     private JButton turn;
 
@@ -121,11 +124,11 @@ public class Main extends JFrame implements MouseListener {
 
         for (int i = 0; i < 16; i++) {
             //outWhitePieces.get(i)=new JButton();
-            outWhitePieces.get(i).setBackground(new Color(51, 0, 0));
+            outWhitePieces.get(i).setBackground(new Color(88, 0, 0));
             //  outWhitePieces.get(i).setBorder(emptyBorder);
             northOfWest.add(outWhitePieces.get(i));
             //  outBlackPieces[i]=new JButton();
-            outBlackPieces.get(i).setBackground(new Color(51, 0, 0));
+            outBlackPieces.get(i).setBackground(new Color(88, 0, 0));
             // outBlackPieces[i].setBorder(emptyBorder);
             southOfWest.add(outBlackPieces.get(i));
         }
@@ -217,8 +220,6 @@ public class Main extends JFrame implements MouseListener {
         }
 
 
-
-
         myFrame.setVisible(true);
         myFrame.setResizable(true);
         myFrame.setExtendedState(myFrame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
@@ -260,10 +261,18 @@ public class Main extends JFrame implements MouseListener {
 
     }
 
+    private boolean isChecked(String color, Square[][] board) {
+        if (color.equals("w")) return wk.isChecked(board);
+        else if (color.equals("b")) return bk.isChecked(board);
+        return false;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
 
+        inDanger = false;
+//Selecting a square
         if (!select) {
             ((Square) (e.getSource())).selectSquare();
         } else {
@@ -276,7 +285,7 @@ public class Main extends JFrame implements MouseListener {
         }
         select = true;
 
-        //selecting a square and showing it's possible squares
+        // showing the possible squares of a select
         if (((Square) (e.getSource())).getPiece() != null && ((Square) (e.getSource())).getPiece().getPieceColor().equals(whosTurn)) {
 
             lastSquare = ((Square) (e.getSource()));
@@ -292,35 +301,52 @@ public class Main extends JFrame implements MouseListener {
                     }
                 }
             }
-
             for (Square ps : possibleMoves) {
                 ps.makePossible();
 
             }
         }
 
-//moving a piece to a possible square
+//moving a piece to a possible empty square
+
+
         else if (((Square) (e.getSource())).getPiece() == null) {
+
             if (((Square) (e.getSource())).isPossibleSquare() && ((Square) (e.getSource())).isSelected()) {
 
-                if(lastPiece instanceof King){
-                    ((King)(lastPiece)).setx(((Square) (e.getSource())).getMyX());
-                    ((King)(lastPiece)).sety(((Square) (e.getSource())).getMyY());
+
+                if (lastPiece instanceof King) {
+                    ((King) (lastPiece)).setx(((Square) (e.getSource())).getMyX());
+                    ((King) (lastPiece)).sety(((Square) (e.getSource())).getMyY());
                 }
                 ((Square) (e.getSource())).setPiece(lastPiece);
 
 
-                lastSquare.removePiece();
+                // lastSquare.removePiece();
                 isMoved = true;
 
                 chessBoardSquares[lastSquare.getMyX()][lastSquare.getMyY()].removePiece();
+                if (isChecked(whosTurn, chessBoardSquares)) {
+                    isMoved = false;
+                    inDanger = true;
+                    ((Square) (e.getSource())).removePiece();
+                    chessBoardSquares[lastSquare.getMyX()][lastSquare.getMyY()].setPiece(lastPiece);
+                    if (lastPiece instanceof King) {
+                        ((King) (lastPiece)).setx(lastSquare.getMyX());
+                        ((King) (lastPiece)).sety(lastSquare.getMyY());
+                    }
+
+                }
 
 
             }
+
         }
         //zadan mohreh ba rng mokhalef
         else if (!((Square) (e.getSource())).getPiece().getPieceColor().equals(whosTurn)) {
+
             if (((Square) (e.getSource())).isPossibleSquare() && ((Square) (e.getSource())).isSelected()) {
+
                 if (!(((Square) (e.getSource())).getPiece() instanceof King)) {
                     Piece piece = ((Square) (e.getSource())).getPiece();
                     JLabel imageIcon = new JLabel(new ImageIcon(piece.getImage()));
@@ -340,14 +366,41 @@ public class Main extends JFrame implements MouseListener {
                         ((King) lastPiece).sety(((Square) (e.getSource())).getMyY());
                     }
                     ((Square) (e.getSource())).setPiece(lastPiece);
-                    lastSquare.removePiece();
+
                     isMoved = true;
 
                     chessBoardSquares[lastSquare.getMyX()][lastSquare.getMyY()].removePiece();
+                    if (isChecked(whosTurn, chessBoardSquares)) {
+                        isMoved = false;
+                        inDanger = true;
+                        if (lastPiece instanceof King) {
+                            ((King) lastPiece).setx(lastSquare.getMyX());
+                            ((King) lastPiece).sety(lastSquare.getMyY());
+                        }
+                        ((Square) (e.getSource())).removePiece();
+                        ((Square) (e.getSource())).setPiece(piece);
+                        lastSquare.setPiece(lastPiece);
+                        if (piece.getPieceColor().equals("w")) {
+
+
+                            outWhitePiecesNum--;
+                            outWhitePieces.get(outWhitePiecesNum).remove(imageIcon);
+
+                            outWhitePieces.remove(piece);
+                        } else if (piece.getPieceColor().equals("b")) {
+
+
+                            outBlackPiecesNum--;
+                            outBlackPieces.get(outBlackPiecesNum).remove(imageIcon);
+                            outBlackPieces.remove(piece);
+                        }
+
+                    }
                 }
             }
 
         }
+
         if (isMoved) {
             changeTurn();
             possibleMoves.clear();
@@ -360,12 +413,27 @@ public class Main extends JFrame implements MouseListener {
         }
 
         if (wk.isChecked(chessBoardSquares)) {
-            turn.setBackground(Color.GREEN);
-            turn.setFont(new Font("Arial", Font.PLAIN, 30));
+            turn.setBackground(Color.red);
+            turn.setFont(new Font("Arial", Font.PLAIN, 25));
             turn.setText("White King is checked!");
+            turn.setForeground(Color.BLACK);
         } else if (bk.isChecked(chessBoardSquares)) {
-            turn.setBackground(Color.RED);
+            turn.setBackground(Color.red);
+            turn.setFont(new Font("Arial", Font.PLAIN, 25));
+            turn.setForeground(Color.BLACK);
             turn.setText("Black King is checked!");
+        } else if (inDanger) {
+            if (whosTurn.equals("w")) {
+                turn.setFont(new Font("Arial", Font.PLAIN, 25));
+                turn.setText("White King is in danger!");
+                // inDanger = false;
+            } else if (whosTurn.equals("b")) {
+                turn.setFont(new Font("Arial", Font.PLAIN, 25));
+                turn.setBackground(Color.BLACK);
+                turn.setText("Black King is in danger!");
+                // inDanger = false;
+            }
+
         } else {
             turn.setText("It's your turn! ");
             turn.setForeground(Color.GRAY);
@@ -373,8 +441,7 @@ public class Main extends JFrame implements MouseListener {
             else turn.setBackground(Color.BLACK);
         }
 
-        System.out.println(wk.getx()+","+wk.gety());
-        System.out.println(bk.getx()+","+bk.gety());
+
     }
 
 

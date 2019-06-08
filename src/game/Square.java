@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * A chess board has 64 squares on a square might exist a piece or not
  */
-public class Square extends JButton {
+public class Square extends JButton  {
 
     private int x;
     private int y;
@@ -106,6 +106,7 @@ public class Square extends JButton {
      */
     public void removePiece(){
         this.piece = null;
+        if(this.getImage()!=null)
         this.remove(image);
 //        this.remove(this.piece);
 //        this.remove(image);
@@ -137,4 +138,10 @@ public class Square extends JButton {
     public Piece getPiece(){
         return piece;
     }
+
+    public void setMyPiece(Piece piece){
+        this.piece = piece;
+    }
+
+
 }

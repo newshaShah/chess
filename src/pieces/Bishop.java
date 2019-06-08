@@ -3,6 +3,7 @@ package pieces;
 import game.Square;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Bishop extends Piece {
     public Bishop(String ID, String imagePath, String color) {
@@ -14,7 +15,7 @@ public class Bishop extends Piece {
     public ArrayList<Square> move(Square[][] boardSquares, int x, int y) {
         //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
     ArrayList<Square> possibleSquares=new ArrayList<>();
-        possibleSquares.clear();
+
 
 
         int tempx=x+1,tempy=y-1;
@@ -79,6 +80,9 @@ public class Bishop extends Piece {
             tempx++;
             tempy++;
         }
+
+
+
         return possibleSquares;
     }
 }

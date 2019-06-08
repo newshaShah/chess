@@ -3,6 +3,7 @@ package pieces;
 import game.Square;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Queen extends Piece {
 
@@ -127,6 +128,9 @@ public class Queen extends Piece {
             tempx++;
             tempy++;
         }
+
+
+
         return possibleSquares;
     }
 }

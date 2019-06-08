@@ -3,6 +3,7 @@ package pieces;
 import game.Square;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Pawn extends Piece {
 
@@ -14,7 +15,7 @@ public class Pawn extends Piece {
 
     }
     @Override
-    public ArrayList<Square> move(Square [][] boardSquares, int x, int y){
+    public ArrayList<Square> move(Square [][] boardSquares, int x, int y)  {
         //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
        // possibleSquares.clear();
         ArrayList<Square> possibleSquares=new ArrayList<>();
@@ -50,6 +51,7 @@ public class Pawn extends Piece {
             if ((y < 7) && (boardSquares[x + 1][y + 1].getPiece() != null) && (!boardSquares[x + 1][y + 1].getPiece().getPieceColor().equals(this.getPieceColor())))
                 possibleSquares.add(boardSquares[x + 1][y + 1]);
         }
+
 
         return possibleSquares;
 
