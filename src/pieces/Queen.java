@@ -5,7 +5,18 @@ import game.Square;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
+/**
+ *  @author Newsha Shahbodaghkhan
+ *  *King class show the Queen's moves that moves and set its ID imagePath and color
+ */
 public class Queen extends Piece {
+    /**
+     *
+     * @param ID set ID of Queen
+     * @param imagePath set image of Queen
+     * @param color set color of Queen
+     */
 
     public Queen(String ID,String imagePath,String color){
         setPieceId(ID);
@@ -13,6 +24,13 @@ public class Queen extends Piece {
         setPieceColor(color);
     }
     @Override
+    /**
+     * @param boardSquare is the current board situation
+     * @param x is the x of Queen in board
+     * @param y is the y of Queen in board
+     * @return arraylist of next possible squares of Queen
+     */
+
     public ArrayList<Square> move(Square [][] boardSquares, int x, int y) {
         //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
         ArrayList<Square> possibleSquares=new ArrayList<>();

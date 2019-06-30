@@ -255,12 +255,28 @@ public class Main extends JFrame implements MouseListener {
         Mainboard = new Main();
     }
 
-    private void changeTurn() {
+    /**
+     * performs changing turn of players
+     */
+
+    public void changeTurn() {
         if (whosTurn.equals("w")) whosTurn = "b";
         else whosTurn = "w";
 
     }
+    /*
+    public boolean checkmateCheck(Square [][] chessBoardSquares){
 
+    }
+
+     */
+
+    /**
+     *
+     * @param color is the player color
+     * @param board is current board
+     * @return true if the player king piece is checked
+     */
     private boolean isChecked(String color, Square[][] board) {
         if (color.equals("w")) return wk.isChecked(board);
         else if (color.equals("b")) return bk.isChecked(board);

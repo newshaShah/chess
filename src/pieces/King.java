@@ -5,8 +5,19 @@ import game.Square;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ *  @author Newsha Shahbodaghkhan
+ *  *King class show the King's moves that moves and set its ID imagePath and color
+ */
+
 public class King extends Piece {
     private int x,y;
+    /**
+     *
+     * @param ID set ID of king
+     * @param imagePath set image king
+     * @param color set color of king
+     */
     public King(String ID,String imagePath,String color,int x,int y)
     {
         this.x=x;
@@ -16,27 +27,51 @@ public class King extends Piece {
         setPieceColor(color);
     }
 
-    public King() {
-    }
+    /**
+     *
+     * @param x set x coordinate of king
+     */
 
     public void setx(int x)
     {
         this.x=x;
     }
+
+    /**
+     *
+     * @param y set y coordinate of a king
+     */
     public void sety(int y)
     {
         this.y=y;
     }
+
+
+    /**
+     *
+     * @return x coordinate of king
+     */
     public int getx()
     {
         return x;
     }
+
+    /**
+     *
+     * @return y coordinate of king
+     */
     public int gety()
     {
         return y;
     }
     @Override
 
+    /**
+     * @param boardSquare is the current board situation
+     * @param x is the x of king in board
+     * @param y is the y of king in board
+     * @return arraylist of next possible squares of king
+     */
     public ArrayList<Square> move(Square[][] squares, int x, int y){
 //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
         ArrayList<Square> possibleSquares=new ArrayList<>();
@@ -53,6 +88,11 @@ public class King extends Piece {
         return possibleSquares;
     }
 
+    /**
+     *
+     * @param squares current situation of a board
+     * @return true if king is checked
+     */
     public boolean isChecked(Square [][] squares){
 //Checking for attack from left,right,up and down
         for(int i=x+1;i<8;i++)

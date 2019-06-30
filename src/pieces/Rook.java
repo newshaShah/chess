@@ -5,13 +5,29 @@ import game.Square;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ *  @author Newsha Shahbodaghkhan
+ *  *King class show the Rook's moves that moves and set its ID imagePath and color
+ */
 public class Rook extends Piece {
+    /**
+     *
+     * @param ID set ID of Rook
+     * @param imagePath set image of Rook
+     * @param color set color of Rook
+     */
     public Rook(String ID,String imagePath,String color){
         setPieceId(ID);
         setImage( imagePath);
         setPieceColor(color);
     }
     @Override
+    /**
+     * @param boardSquare is the current board situation
+     * @param x is the x of Rook in board
+     * @param y is the y of Rook in board
+     * @return arraylist of next possible squares of Rook
+     */
     public ArrayList<Square> move(Square [][] boardSquares, int x, int y){
         //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
         ArrayList<Square> possibleSquares=new ArrayList<>();

@@ -4,10 +4,19 @@ import game.Square;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+/**
+ *  @author Newsha Shahbodaghkhan
+ *  *King class show the Pawn's moves that moves and set its ID imagePath and color
+ */
 
 public class Pawn extends Piece {
 
-
+    /**
+     *
+     * @param ID set ID of Pawn
+     * @param imagePath set image of Pawn
+     * @param color set color of Pawn
+     */
     public Pawn(String ID,String imagePath,String color){
         setPieceId(ID);
         setImage( imagePath);
@@ -15,6 +24,12 @@ public class Pawn extends Piece {
 
     }
     @Override
+    /**
+     * @param boardSquare is the current board situation
+     * @param x is the x of Pawn in board
+     * @param y is the y of Pawn in board
+     * @return arraylist of next possible squares of Pawn
+     */
     public ArrayList<Square> move(Square [][] boardSquares, int x, int y)  {
         //The java.util.ArrayList.clear() method removes all of the elements from this list.The list will be empty after this call returns.
        // possibleSquares.clear();

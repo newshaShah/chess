@@ -4,14 +4,30 @@ import game.Square;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+/**
+ * @author Newsha Shahbodaghkhan
+ *Bishop class show the Knight's moves that moves and set its ID imagePath and color
+ */
 
 public class Knight extends Piece {
+    /**
+     *
+     * @param ID set ID of Knight
+     * @param imagePath set image of Knight
+     * @param color set color of Knight
+     */
     public Knight(String ID, String imagePath, String color) {
         setPieceId(ID);
         setImage(imagePath);
         setPieceColor(color);
     }
     @Override
+    /**
+     * @param boardSquare is the current board situation
+     * @param x is the x of Knight in board
+     * @param y is the y of Knight in board
+     * @return arraylist of next possible squares of Knight
+     */
     public ArrayList<Square> move(Square [][] boardSquares, int x, int y) {
         ArrayList<Square> possibleSquares=new ArrayList<>();
         //possibleSquares.clear();
