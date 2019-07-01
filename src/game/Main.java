@@ -288,7 +288,7 @@ public class Main extends JFrame implements MouseListener {
 
 
         inDanger = false;
-//Selecting a square
+        //Selecting a square
         if (!select) {
             ((Square) (e.getSource())).selectSquare();
         } else {

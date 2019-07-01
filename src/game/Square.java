@@ -13,10 +13,10 @@ public class Square extends JButton  {
     private int x;
     private int y;
     private Piece piece;
-    private boolean isSelected = false;
-    private boolean hasPiece = false;
+    private boolean isSelected ;
+    private boolean hasPiece ;
     private JLabel image;
-    private boolean possibleSquare = false;
+    private boolean possibleSquare ;
 
     /**
      *
@@ -26,7 +26,9 @@ public class Square extends JButton  {
     public Square(int x, int y){
         this.x=x;
         this.y = y;
-
+        isSelected = false;
+        hasPiece = false;
+        possibleSquare = false;
 
     }
 

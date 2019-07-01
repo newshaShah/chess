@@ -14,10 +14,8 @@ private String pieceColor;
 private String imagePath;
 
 
-//possibleSquares is protected in Piece class therefore subclasses have access to it
-//for all subclasses used one arrayList and before using it in each class content will be cleared
 
-private ArrayList<Square> possibleSquares = new ArrayList<>();
+
 
 
 
@@ -50,5 +48,4 @@ private ArrayList<Square> possibleSquares = new ArrayList<>();
     public abstract ArrayList<Square> move(Square[][] boardSquares, int x, int y);
 
 
-    // public abstract ArrayList<Square> move();
 }

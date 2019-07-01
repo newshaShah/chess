@@ -266,8 +266,6 @@ public class King extends Piece {
 
 
     }
-    public boolean isCheckMate(Square [][] squares){
-        return false;
-    }
+
 
 }

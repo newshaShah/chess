@@ -72,8 +72,5 @@ public class Pawn extends Piece {
 
     }
 
-//    @Override
-//    public ArrayList<Square> move() {
-//        return null;
-//    }
+
 }
